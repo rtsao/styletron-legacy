@@ -4,7 +4,7 @@
 [![dependencies status][deps-badge]][deps-href]
 [![npm version][npm-badge]][npm-href]
 
-A server-rendering helper module for [styletron](https://github.com/rtsao/styletron)
+A server-rendering helper module for [`styletron`](https://github.com/rtsao/styletron)
 
 ## Usage
 
@@ -30,14 +30,14 @@ const {html, css, hydrationSrc} = styletronServer.renderStatic(() => {
 /**
  * `css` is a string containing all the css that was passed into `injectOnce`
  * during the render. When you send down the HTML to the client, you should set this
- * as the contents of a <style data-styletron></style> element in the <head>.
+ * as the contents of <style data-styletron></style> in the <head>.
  * This string should be sanitized before being set as contents into HTML.
  */
 
 /**
  * `hydrationSrc` is a string of JS source code to hydrate styletron on the
  * client. This prevents re-injection of styles rendered onthe server. Set this string
- * as the contents of a <script></script> element before your main bundle.
+ * as the contents of a <script> element before your main bundle.
  */
 ```
 
