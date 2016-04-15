@@ -11,6 +11,8 @@ A server-rendering helper module for [`styletron`](https://github.com/rtsao/styl
 #### Extracting "injected" CSS at render-time on the server
 
 ```js
+const styletronServer = require('styletron-server');
+
 const renderApp = mockRenderFn() {
   /**
    * `renderApp` is some function that renders your app, returning a string of HTML. 
@@ -18,7 +20,6 @@ const renderApp = mockRenderFn() {
    */
 };
 
-const styletronServer = require('styletron-server');
 const {html, css, hydrationSrc} = styletronServer.renderStatic(() => {
   const html = renderApp();
   return html;
