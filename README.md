@@ -13,7 +13,7 @@ A server-rendering helper module for [`styletron`](https://github.com/rtsao/styl
 ```js
 const styletronServer = require('styletron-server');
 
-const renderApp = mockRenderFn() {
+const renderApp = function mockRenderFn() {
   /**
    * `renderApp` is some function that renders your app, returning a string of HTML. 
    * This function should also result in `injectOnce` being called at some point.
