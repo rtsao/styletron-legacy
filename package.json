@@ -14,6 +14,7 @@
     "tape": "^4.5.1"
   },
   "dependencies": {
+    "safe-string": "^1.0.0",
     "styletron": "0.2.x"
   },
   "license": "MIT"

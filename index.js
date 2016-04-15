@@ -2,6 +2,7 @@
 
 var styletron = require('styletron');
 var constants = styletron.constants;
+var safeString = require('safe-string');
 
 function renderStatic(renderFn) {
   styletron.reset();
@@ -9,19 +10,23 @@ function renderStatic(renderFn) {
   var html = renderFn();
   var css = styletron.flushBuffer();
   var keys = styletron.getInjectedKeys();
-  var scriptSrc = [
-    ';try {',
-      'window["', constants.HYDRATE_KEY, '"] = ', JSON.stringify(keys), ';',
-    '} catch(e) {};'
-  ].join('');
 
   return {
     html: html,
-    css: css,
-    hydrationSrc: scriptSrc
+    css: safeString(css),
+    hydrationSrc: generateScriptSrc(keys)
   };
 }
 
 module.exports = {
   renderStatic: renderStatic
 };
+
+function generateScriptSrc(keys) {
+  var sanitizedKeys = safeString(JSON.stringify(keys));
+  return [
+    ';try {',
+      'window["', constants.HYDRATE_KEY, '"] = ', sanitizedKeys, ';',
+    '} catch(e) {};'
+  ].join('');
+}

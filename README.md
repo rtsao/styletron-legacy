@@ -34,7 +34,6 @@ const {html, css, hydrationSrc} = styletronServer.renderStatic(() => {
  * `css` is a string containing all the css that was passed into `injectOnce`
  * during the render. When you send down the HTML to the client, you should set this
  * as the contents of <style data-styletron></style> in the <head>.
- * This string should be sanitized before being set as contents into HTML.
  */
 
 /**
