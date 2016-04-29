@@ -5,7 +5,7 @@ var styletronServer = require('../');
 
 test('server rendering', function(t) {
   var result = styletronServer.renderStatic(function mockRender() {
-    styletron.injectOnce('bar', '.bar {}');
+    styletron.injectOnce('.bar {}', 'bar');
     return 'html contents';
   });
 
@@ -19,10 +19,10 @@ test('server rendering', function(t) {
 test('reset before render', function(t) {
   // inject something before
   styletron.startBuffering();
-  styletron.injectOnce('foo', '.foo {}');
+  styletron.injectOnce('.foo {}', 'foo');
 
   var result = styletronServer.renderStatic(function mockRender() {
-    styletron.injectOnce('bar', '.bar {}');
+    styletron.injectOnce('.bar {}', 'bar');
     return 'html contents';
   });
 

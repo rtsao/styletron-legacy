@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "safe-string": "^1.0.0",
-    "styletron": "0.2.x"
+    "styletron": "^1.0.0"
   },
   "license": "MIT"
 }
