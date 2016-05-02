@@ -13,8 +13,8 @@ function renderStatic(renderFn) {
 
   return {
     html: html,
-    css: safeString(css),
-    hydrationSrc: generateScriptSrc(keys)
+    css: css,
+    hydrationSrc: generateHydrationScriptSrc(keys, css)
   };
 }
 
@@ -22,11 +22,18 @@ module.exports = {
   renderStatic: renderStatic
 };
 
-function generateScriptSrc(keys) {
+function generateHydrationScriptSrc(keys, css) {
   var sanitizedKeys = safeString(JSON.stringify(keys));
+  var safeCssString = safeString(JSON.stringify(css));
   return [
-    ';try {',
-      'window["', constants.HYDRATE_KEY, '"] = ', sanitizedKeys, ';',
-    '} catch(e) {};'
+    ';try{',
+      '(function(){',
+        'window["', constants.HYDRATE_KEY, '"]=', sanitizedKeys, ';',
+        'var style=document.createElement("style");',
+        'style.setAttribute("data-styletron","");',
+        'style.appendChild(document.createTextNode(' + safeCssString + '));',
+        '(document.head||document.getElementsByTagName("head")[0]).appendChild(style);',
+      '})();',
+    '}catch(e){};',
   ].join('');
 }

@@ -12,23 +12,23 @@ test('server rendering', function(t) {
   t.equal(result.html, 'html contents');
   t.equal(result.css, '.bar {}');
   t.equal(result.hydrationSrc,
-    ';try {window["__GLOBAL_STYLETRON_HYDRATE@1__"] = ["bar"];} catch(e) {};');
+    ';try{(function(){window["__GLOBAL_STYLETRON_HYDRATE@1__"]=["bar"];var style=document.createElement("style");style.setAttribute("data-styletron","");style.appendChild(document.createTextNode(".bar {}"));(document.head||document.getElementsByTagName("head")[0]).appendChild(style);})();}catch(e){};');
   t.end();
 });
 
 test('reset before render', function(t) {
-  // inject something before
+  // inject something before (should not be in post-render buffer)
   styletron.startBuffering();
   styletron.injectOnce('.foo {}', 'foo');
 
   var result = styletronServer.renderStatic(function mockRender() {
-    styletron.injectOnce('.bar {}', 'bar');
+    styletron.injectOnce('.bar > .foo {}', 'bar');
     return 'html contents';
   });
 
   t.equal(result.html, 'html contents');
-  t.equal(result.css, '.bar {}');
+  t.equal(result.css, '.bar > .foo {}');
   t.equal(result.hydrationSrc,
-    ';try {window["__GLOBAL_STYLETRON_HYDRATE@1__"] = ["bar"];} catch(e) {};');
+    ';try{(function(){window["__GLOBAL_STYLETRON_HYDRATE@1__"]=["bar"];var style=document.createElement("style");style.setAttribute("data-styletron","");style.appendChild(document.createTextNode(".bar \\u003E .foo {}"));(document.head||document.getElementsByTagName("head")[0]).appendChild(style);})();}catch(e){};');
   t.end();
 });
