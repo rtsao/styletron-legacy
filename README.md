@@ -20,7 +20,7 @@ const renderApp = function mockRenderFn() {
    */
 };
 
-const {html, css, hydrationSrc} = styletronServer.renderStatic(() => {
+const {html, hydrationSrc} = styletronServer.renderStatic(() => {
   const html = renderApp();
   return html;
 }
@@ -31,15 +31,11 @@ const {html, css, hydrationSrc} = styletronServer.renderStatic(() => {
  */
 
 /**
- * `css` is a string containing all the css that was passed into `injectOnce`
- * during the render. When you send down the HTML to the client, you should set this
- * as the contents of <style data-styletron></style> in the <head>.
- */
-
-/**
- * `hydrationSrc` is a string of JS source code to hydrate styletron on the
- * client. This prevents re-injection of styles rendered onthe server. Set this string
- * as the contents of a <script> element before your main bundle.
+ * `hydrationSrc` is a string of JS source code to hydrate styletron on the client.
+ * This script injects a <style> element containing the server-rendered styles and also 
+ * prevents re-injection of server-rendered styles on subsequent client renders.
+ * Set this string as the contents of a <script> element in <head> so it is before <body>
+ * and your client bundle.
  */
 ```
 
