@@ -20,7 +20,7 @@ const renderApp = function mockRenderFn() {
    */
 };
 
-const {html, hydrationSrc} = styletronServer.renderStatic(() => {
+const {html, css, hydrationSrc} = styletronServer.renderStatic(() => {
   const html = renderApp();
   return html;
 }
@@ -28,6 +28,11 @@ const {html, hydrationSrc} = styletronServer.renderStatic(() => {
 /**
  * `html` is simply the return value of the function passed into `renderStatic`.
  * It is passed through for convenience.
+ */
+
+/**
+ * `css` is a string containing all CSS that was that injected into the buffer
+ * during the render.
  */
 
 /**
