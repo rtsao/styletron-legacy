@@ -14,6 +14,7 @@ function renderStatic(renderFn) {
   return {
     html: html,
     css: css,
+    injectedKeys: keys,
     hydrationSrc: generateHydrationScriptSrc(keys, css)
   };
 }

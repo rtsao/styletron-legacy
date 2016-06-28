@@ -11,6 +11,7 @@ test('server rendering', function(t) {
 
   t.equal(result.html, 'html contents');
   t.equal(result.css, '.bar {}');
+  t.deepLooseEqual(result.injectedKeys, ['bar']);
   t.equal(result.hydrationSrc,
     ';try{(function(){window["__GLOBAL_STYLETRON_HYDRATE@1__"]=["bar"];var style=document.createElement("style");style.setAttribute("data-styletron","");style.appendChild(document.createTextNode(".bar {}"));(document.head||document.getElementsByTagName("head")[0]).appendChild(style);})();}catch(e){};');
   t.end();
@@ -28,6 +29,7 @@ test('reset before render', function(t) {
 
   t.equal(result.html, 'html contents');
   t.equal(result.css, '.bar > .foo {}');
+  t.deepLooseEqual(result.injectedKeys, ['bar']);
   t.equal(result.hydrationSrc,
     ';try{(function(){window["__GLOBAL_STYLETRON_HYDRATE@1__"]=["bar"];var style=document.createElement("style");style.setAttribute("data-styletron","");style.appendChild(document.createTextNode(".bar \\u003E .foo {}"));(document.head||document.getElementsByTagName("head")[0]).appendChild(style);})();}catch(e){};');
   t.end();
