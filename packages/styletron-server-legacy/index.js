@@ -1,6 +1,6 @@
 'use strict';
 
-var styletron = require('styletron');
+var styletron = require('styletron-legacy');
 var constants = styletron.constants;
 var safeString = require('safe-string');
 

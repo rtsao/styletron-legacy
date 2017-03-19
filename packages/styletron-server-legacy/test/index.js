@@ -1,5 +1,5 @@
 var test = require('tape');
-var styletron = require('styletron');
+var styletron = require('styletron-legacy');
 
 var styletronServer = require('../');
 

@@ -1,21 +1,22 @@
 {
-  "name": "styletron-server",
-  "version": "1.2.0",
-  "description": "A server-rendering helper module for styletron",
+  "name": "styletron-legacy-monorepo",
+  "description": "Legacy styletron",
   "author": "Ryan Tsao <ryan.j.tsao@gmail.com>",
-  "homepage": "https://github.com/rtsao/styletron-server",
-  "repository": "git@github.com:rtsao/styletron-server.git",
-  "bugs": "https://github.com/rtsao/styletron-server/issues",
-  "main": "index.js",
+  "homepage": "https://github.com/rtsao/styletron-legacy",
+  "repository": "git@github.com:rtsao/styletron-legacy.git",
+  "bugs": "https://github.com/rtsao/styletron-legacy/issues",
   "scripts": {
-    "test": "node test/index.js"
+    "bootstrap": "lerna bootstrap",
+    "clean": "lerna clean",
+    "lint": "eslint packages/*/src/**",
+    "test": "lerna run test --concurrency=1"
   },
+  "dependencies": {},
   "devDependencies": {
-    "tape": "^4.5.1"
-  },
-  "dependencies": {
-    "safe-string": "^1.0.0",
-    "styletron": "^1.0.0"
+    "eslint": "^3.8.1",
+    "lerna": "2.0.0-beta.37",
+    "tape": "^4.6.0",
+    "unitest": "^1.0.0"
   },
   "license": "MIT"
 }
