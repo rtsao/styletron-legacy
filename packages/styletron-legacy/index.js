@@ -128,7 +128,7 @@ function injectStylesIntoHead(css) {
     var found = existingStyleElement();
     styleDOMElement = found ? found : appendToHead(createStyleElement());
   }
-  styleDOMElement.appendChild(document.createTextNode(css));
+  styleDOMElement.appendChild(topLevel.document.createTextNode(css));
 }
 
 /**
@@ -175,17 +175,17 @@ function flushToStyleElement() {
 // *******
 
 function appendToHead(element) {
-  var head = document.head || document.getElementsByTagName('head')[0];
+  var head = topLevel.document.head || topLevel.document.getElementsByTagName('head')[0];
   head.appendChild(element);
   return element;
 }
 
 function existingStyleElement() {
-  return document.querySelector('style[data-styletron]');
+  return topLevel.document.querySelector('style[data-styletron]');
 }
 
 function createStyleElement() {
-  var element = document.createElement('style');
+  var element = topLevel.document.createElement('style');
   element.type = 'text/css';
   element.setAttribute('data-styletron', '');
   return element;
