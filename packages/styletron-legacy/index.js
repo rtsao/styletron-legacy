@@ -11,7 +11,7 @@ var topLevel = typeof global !== 'undefined'
   : typeof window !== 'undefined'
     ? window
     : {};
-
+var scopedDocument = topLevel.document;
 var styletron = topLevel[constants.INSTANCE_KEY];
 
 if (!styletron) {
@@ -75,7 +75,7 @@ function injectOnce(css, key) {
   }
 
   if (!isBuffering) {
-    if (typeof document === 'undefined' || typeof window === 'undefined') {
+    if (typeof scopedDocument === 'undefined' || typeof window === 'undefined') {
       // `styletron.startBuffering()` must be called before server rendering.
       // In this case (where no document exists and buffering not started), no
       // CSS will be added to the buffer for extraction on the server.
@@ -128,7 +128,7 @@ function injectStylesIntoHead(css) {
     var found = existingStyleElement();
     styleDOMElement = found ? found : appendToHead(createStyleElement());
   }
-  styleDOMElement.appendChild(topLevel.document.createTextNode(css));
+  styleDOMElement.appendChild(scopedDocument.createTextNode(css));
 }
 
 /**
@@ -175,17 +175,17 @@ function flushToStyleElement() {
 // *******
 
 function appendToHead(element) {
-  var head = topLevel.document.head || topLevel.document.getElementsByTagName('head')[0];
+  var head = scopedDocument.head || scopedDocument.getElementsByTagName('head')[0];
   head.appendChild(element);
   return element;
 }
 
 function existingStyleElement() {
-  return topLevel.document.querySelector('style[data-styletron]');
+  return scopedDocument.querySelector('style[data-styletron]');
 }
 
 function createStyleElement() {
-  var element = topLevel.document.createElement('style');
+  var element = scopedDocument.createElement('style');
   element.type = 'text/css';
   element.setAttribute('data-styletron', '');
   return element;
